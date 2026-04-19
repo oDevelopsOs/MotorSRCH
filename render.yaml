@@ -1,6 +1,10 @@
 # Render Blueprint — MotorDeBusqueda (monorepo)
 # https://docs.render.com/docs/blueprint-spec
 #
+# Si el Web Service se creó como "Python" en lugar de Docker: en el dashboard pon
+# Start Command = sh start-web.sh (y Build = pip install -r requirements.txt). Lo recomendado es
+# borrar ese servicio y volver a crearlo como Docker con este blueprint (motor-api usa Dockerfile en la raíz).
+#
 # Incluye: Postgres + Redis (Key Value) + Meilisearch + Qdrant (private) + Web (API) + Worker (processor).
 # NO incluye: NSQ, crawler, FlareSolverr, Crawl4AI, SearXNG, nginx — usa VPS/docker-compose para el stack completo.
 #
