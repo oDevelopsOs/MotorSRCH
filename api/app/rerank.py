@@ -1,19 +1,22 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
-
-from sentence_transformers import CrossEncoder
+from typing import TYPE_CHECKING, Any
 
 from . import settings
 
+if TYPE_CHECKING:
+    from sentence_transformers import CrossEncoder
+
 log = logging.getLogger("investsearch.rerank")
-_ce: CrossEncoder | None = None
+_ce: "CrossEncoder | None" = None
 
 
-def get_cross_encoder() -> CrossEncoder:
+def get_cross_encoder() -> "CrossEncoder":
     global _ce
     if _ce is None:
+        from sentence_transformers import CrossEncoder
+
         _ce = CrossEncoder(settings.RERANK_MODEL)
     return _ce
 

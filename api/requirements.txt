@@ -1,3 +1,8 @@
+# PyTorch: usar ruedas CPU (--extra-index-url) para no instalar el stack CUDA (nvidia-*, triton),
+# que en Render free/starter (512Mi) dispara OOM. El Dockerfile instala torch CPU en dos pasos;
+# en pip nativo, preferir `sh install-deps.sh` desde la raíz del repo.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.2.0,<3.0.0
 fastapi>=0.115.0
 uvicorn[standard]>=0.30.0
 gunicorn>=22.0.0

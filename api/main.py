@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import time
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 import redis
@@ -11,7 +11,9 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from meilisearch import Client as MeiliClient
 from qdrant_client import QdrantClient
-from sentence_transformers import SentenceTransformer
+
+if TYPE_CHECKING:
+    from sentence_transformers import SentenceTransformer
 
 from app import settings
 from app.brain import router as brain_router
@@ -32,7 +34,7 @@ app.include_router(brain_router)
 
 _meili: MeiliClient | None = None
 _qdrant: QdrantClient | None = None
-_embed: SentenceTransformer | None = None
+_embed: "SentenceTransformer | None" = None
 _redis: redis.Redis | None = None
 
 
@@ -50,9 +52,11 @@ def get_qdrant() -> QdrantClient:
     return _qdrant
 
 
-def get_embed() -> SentenceTransformer:
+def get_embed() -> "SentenceTransformer":
     global _embed
     if _embed is None:
+        from sentence_transformers import SentenceTransformer
+
         _embed = SentenceTransformer(settings.EMBED_MODEL)
     return _embed
 
