@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+.Python
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.idea/
+.vscode/
+*.log
+go.work
+go.work.sum

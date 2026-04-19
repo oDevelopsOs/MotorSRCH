@@ -1,0 +1,1 @@
+"""InvestSearch API application package."""

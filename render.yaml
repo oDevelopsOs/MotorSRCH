@@ -1,0 +1,115 @@
+# Render Blueprint — MotorDeBusqueda (monorepo)
+# https://docs.render.com/docs/blueprint-spec
+#
+# Incluye: Postgres + Redis (Key Value) + Meilisearch + Qdrant (private) + Web (API) + Worker (processor).
+# NO incluye: NSQ, crawler, FlareSolverr, Crawl4AI, SearXNG, nginx — usa VPS/docker-compose para el stack completo.
+#
+# Tras el deploy: ejecuta migraciones en Postgres (./migrations) si tu despliegue las requiere.
+
+databases:
+  - name: motor-db
+    databaseName: motor
+    user: motor
+    postgresMajorVersion: "16"
+    region: oregon
+
+envVarGroups:
+  - name: motor-shared
+    envVars:
+      - key: MEILI_MASTER_KEY
+        generateValue: true
+
+services:
+  - type: keyvalue
+    name: motor-redis
+    plan: starter
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: Render private network access
+
+  - type: pserv
+    name: motor-meilisearch
+    runtime: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./deploy/render/meilisearch/Dockerfile
+    dockerContext: ./deploy/render/meilisearch
+    disk:
+      name: meili-data
+      mountPath: /meili_data
+      sizeGB: 10
+    envVars:
+      - fromGroup: motor-shared
+      - key: MEILI_ENV
+        value: production
+      - key: MEILI_HTTP_ADDR
+        value: 0.0.0.0:7700
+
+  - type: pserv
+    name: motor-qdrant
+    runtime: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./deploy/render/qdrant/Dockerfile
+    dockerContext: ./deploy/render/qdrant
+    disk:
+      name: qdrant-data
+      mountPath: /qdrant/storage
+      sizeGB: 10
+
+  - type: web
+    name: motor-api
+    runtime: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: ./api
+    healthCheckPath: /health
+    envVars:
+      - fromGroup: motor-shared
+      - key: MEILI_URL
+        value: http://motor-meilisearch:7700
+      - key: QDRANT_URL
+        value: http://motor-qdrant:6333
+      - key: QDRANT_COLLECTION
+        value: documents
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: motor-redis
+          property: connectionString
+      - key: ENABLE_SEARXNG
+        value: "0"
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: UVICORN_WORKERS
+        value: "1"
+
+  - type: worker
+    name: motor-processor
+    runtime: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./processor/Dockerfile
+    dockerContext: ./processor
+    envVars:
+      - fromGroup: motor-shared
+      - key: DATABASE_URL
+        fromDatabase:
+          name: motor-db
+          property: connectionString
+      - key: MEILI_URL
+        value: http://motor-meilisearch:7700
+      - key: QDRANT_URL
+        value: http://motor-qdrant:6333
+      - key: QDRANT_COLLECTION
+        value: documents
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: motor-redis
+          property: connectionString
+      - key: PROCESSOR_WORKERS
+        value: "1"

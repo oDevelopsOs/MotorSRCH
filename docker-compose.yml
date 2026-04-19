@@ -1,0 +1,268 @@
+# NSQ: cola entre crawler → processor
+#   - nsqd (4150 TCP publica mensajes; 4151 HTTP)
+#   - nsqlookupd (4160/4161)
+#   - nsq_to_http: topic raw_pages → POST processor /internal/ingest
+# UI opcional: `docker compose --profile nsqadmin up -d` → http://localhost:4171
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-motor}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-motor}
+      POSTGRES_DB: ${POSTGRES_DB:-motor}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-motor} -d ${POSTGRES_DB:-motor}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nsqlookupd:
+    image: nsqio/nsq:v1.2.1
+    command: /nsqlookupd
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+
+  nsqd:
+    image: nsqio/nsq:v1.2.1
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=nsqd
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+
+  nsqadmin:
+    image: nsqio/nsq:v1.2.1
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "4171:4171"
+    profiles:
+      - nsqadmin
+
+  nsq_to_http:
+    image: nsqio/nsq:v1.2.1
+    command:
+      - /nsq_to_http
+      - --topic=raw_pages
+      - --channel=processor
+      - --lookupd-http-address=nsqlookupd:4161
+      - --post=http://processor:8080/internal/ingest
+      - --max-in-flight=10
+    depends_on:
+      - nsqlookupd
+      - nsqd
+      - processor
+    restart: unless-stopped
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.11
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-dev_master_key_change_me}
+      MEILI_ENV: development
+    ports:
+      - "7700:7700"
+    volumes:
+      - meili_data:/meili_data
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 2gb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # FlareSolverr: API JSON interna; el crawler usa http://flaresolverr:8191/v1
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    environment:
+      LOG_LEVEL: warn
+    shm_size: "2gb"
+
+  # Crawl4AI: microservicio HTTP solo en red interna (el crawler llama a http://crawl4ai:11235/crawl).
+  # No publicamos 11235 al host para no exponer paneles web de la imagen; depuración: `docker compose run --rm -p 11235:11235 ...` o override local.
+  crawl4ai:
+    image: unclecode/crawl4ai:latest
+    shm_size: "1g"
+    restart: unless-stopped
+
+  # Camoufox bridge: Firefox anti-fingerprint vía FastAPI → POST /v1/fetch (el crawler usa CAMOUFOX_URL).
+  # Perfil `camoufox`. Imagen pesada (descarga binario Camoufox en build).
+  camoufox-bridge:
+    build:
+      context: ./camoufox-bridge
+      dockerfile: Dockerfile
+    profiles:
+      - camoufox
+    environment:
+      CAMOUFOX_HEADLESS: ${CAMOUFOX_HEADLESS:-1}
+      CAMOUFOX_BRIDGE_TOKEN: ${CAMOUFOX_BRIDGE_TOKEN:-}
+    shm_size: "2gb"
+
+  # Ollama opcional (perfil `ollama`): LLM local para la API y extracciones avanzadas en Crawl4AI vía .llm.env
+  ollama:
+    image: ollama/ollama:latest
+    profiles:
+      - ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  # SearXNG: meta-búsqueda agregada (JSON). API usa SEARXNG_URL=http://searxng:8080 con ENABLE_SEARXNG=1
+  # settings.yml: motores por categoría (general, news, science, it) + formato json
+  searxng:
+    image: searxng/searxng:latest
+    profiles:
+      - searxng
+    environment:
+      BASE_URL: http://localhost:8088/
+    volumes:
+      - ./searxng/settings.yml:/etc/searxng/settings.yml:ro
+    ports:
+      - "8088:8080"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      MEILI_URL: http://meilisearch:7700
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-dev_master_key_change_me}
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: documents
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      EMBED_MODEL: ${EMBED_MODEL:-BAAI/bge-m3}
+      USE_OLLAMA_FOR_PLAN: ${USE_OLLAMA_FOR_PLAN:-0}
+      ENABLE_SYNTHESIS: ${ENABLE_SYNTHESIS:-0}
+      ENABLE_RERANK: ${ENABLE_RERANK:-0}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      SYNTHESIS_PROVIDER: ${SYNTHESIS_PROVIDER:-ollama}
+      FIRECRAWL_AGENT_BASE_URL: ${FIRECRAWL_AGENT_BASE_URL:-https://api.firecrawl.dev}
+      FIRECRAWL_AGENT_API_KEY: ${FIRECRAWL_AGENT_API_KEY:-}
+      OPENPERPLEX_URL: ${OPENPERPLEX_URL:-}
+      VANE_API_URL: ${VANE_API_URL:-}
+      VANE_SEARCH_PATH: ${VANE_SEARCH_PATH:-api/search}
+      BRAIN_HTTP_TIMEOUT: ${BRAIN_HTTP_TIMEOUT:-120}
+      BRAIN_BOOST_MAX_WAIT: ${BRAIN_BOOST_MAX_WAIT:-90}
+      ENABLE_SEARXNG: ${ENABLE_SEARXNG:-0}
+      SEARXNG_URL: ${SEARXNG_URL:-}
+      SEARXNG_MAX_RESULTS: ${SEARXNG_MAX_RESULTS:-15}
+      ENABLE_SEARXNG_DECOMPOSITION: ${ENABLE_SEARXNG_DECOMPOSITION:-1}
+      SEARXNG_SUBQUERY_TIMEOUT: ${SEARXNG_SUBQUERY_TIMEOUT:-8}
+      SEARXNG_AS_PRIMARY: ${SEARXNG_AS_PRIMARY:-1}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+      qdrant:
+        condition: service_started
+      redis:
+        condition: service_started
+
+  crawler:
+    build:
+      context: ./crawler
+      dockerfile: Dockerfile
+    environment:
+      NSQD_ADDR: nsqd:4150
+      REDIS_URL: redis://redis:6379/0
+      FLARESOLVERR_URL: http://flaresolverr:8191
+      CRAWL4AI_URL: ${CRAWL4AI_URL:-http://crawl4ai:11235}
+      CRAWL4AI_DOMAINS: ${CRAWL4AI_DOMAINS:-}
+      FIRECRAWL_URL: ${FIRECRAWL_URL:-}
+      FIRECRAWL_API_KEY: ${FIRECRAWL_API_KEY:-}
+      FIRECRAWL_DOMAINS: ${FIRECRAWL_DOMAINS:-}
+      TOR_PROXY: ${TOR_PROXY:-}
+      COLLY_HTTP_PROXY: ${COLLY_HTTP_PROXY:-}
+      CURL_HTTP_PROXY: ${CURL_HTTP_PROXY:-}
+      CAMOUFOX_URL: ${CAMOUFOX_URL:-}
+      CAMOUFOX_DOMAINS: ${CAMOUFOX_DOMAINS:-}
+      CAMOUFOX_BRIDGE_TOKEN: ${CAMOUFOX_BRIDGE_TOKEN:-}
+      SCRAPPEY_URL: ${SCRAPPEY_URL:-https://publisher.scrappey.com}
+      SCRAPPEY_API_KEY: ${SCRAPPEY_API_KEY:-}
+      SCRAPPEY_DOMAINS: ${SCRAPPEY_DOMAINS:-}
+      FLARE_DOMAINS: ${FLARE_DOMAINS:-}
+      CURL_IMPERSONATE_PATH: ${CURL_IMPERSONATE_PATH:-/usr/local/bin/curl_chrome120}
+      CRAWL_INTERVAL_MINUTES: ${CRAWL_INTERVAL_MINUTES:-0}
+      FRED_API_KEY: ${FRED_API_KEY:-}
+    depends_on:
+      - nsqd
+      - redis
+      - flaresolverr
+      - crawl4ai
+
+  processor:
+    build:
+      context: ./processor
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      MEILI_URL: http://meilisearch:7700
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-dev_master_key_change_me}
+      QDRANT_URL: http://qdrant:6333
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgresql://${POSTGRES_USER:-motor}:${POSTGRES_PASSWORD:-motor}@postgres:5432/${POSTGRES_DB:-motor}
+      ENABLE_EMBEDDINGS: ${ENABLE_EMBEDDINGS:-true}
+      ENABLE_FINBERT: ${ENABLE_FINBERT:-false}
+      ENABLE_TRANSLATION: ${ENABLE_TRANSLATION:-false}
+      ENABLE_MINHASH: ${ENABLE_MINHASH:-true}
+      QDRANT_COLLECTION: documents
+      EMBED_MODEL: ${EMBED_MODEL:-BAAI/bge-m3}
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    depends_on:
+      postgres:
+        condition: service_healthy
+      nsqd:
+        condition: service_started
+      nsqlookupd:
+        condition: service_started
+      meilisearch:
+        condition: service_started
+      qdrant:
+        condition: service_started
+      redis:
+        condition: service_started
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8888:80"
+    depends_on:
+      - api
+
+volumes:
+  pg_data:
+  meili_data:
+  qdrant_data:
+  redis_data:
+  hf_cache:
+  ollama_data:

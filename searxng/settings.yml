@@ -1,0 +1,144 @@
+# Configuración SearXNG para MotorDeBusqueda.
+# Se monta en el contenedor como /etc/searxng/settings.yml (véase docker-compose).
+# Cambia server.secret_key antes de producción (o usa variable de entorno si tu imagen la inyecta).
+
+use_default_settings: true
+
+server:
+  secret_key: "CAMBIA_ESTO_POR_UN_SECRETO_LARGO_Y_ALEATORIO"
+  limiter: false
+  image_proxy: false
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  default_lang: ""
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
+  formats:
+    - html
+    - json
+
+engines:
+  # ── GENERAL ──────────────────────────────────────────
+  - name: google
+    engine: google
+    shortcut: g
+    categories: [general, news]
+
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: [general, news]
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    categories: [general]
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: [general, news]
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    categories: [general]
+
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    categories: [general]
+
+  - name: mojeek
+    engine: mojeek
+    shortcut: mjk
+    categories: [general]
+
+  # ── IDIOMAS / REGIONES ───────────────────────────────
+  - name: yandex
+    engine: yandex
+    shortcut: ydx
+    categories: [general, news]
+
+  - name: baidu
+    engine: baidu
+    shortcut: bd
+    categories: [general]
+
+  - name: sogou
+    engine: sogou
+    shortcut: sg
+    categories: [general]
+
+  # ── WIKIPEDIA ────────────────────────────────────────
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: [general]
+    weight: 2.0
+
+  # ── ACADÉMICO ────────────────────────────────────────
+  - name: semantic scholar
+    engine: semantic_scholar
+    shortcut: ss
+    categories: [science]
+
+  - name: arxiv
+    engine: arxiv
+    shortcut: arx
+    categories: [science]
+
+  - name: openalex
+    engine: openalex
+    shortcut: oax
+    categories: [science]
+
+  - name: base
+    engine: base
+    shortcut: bs
+    categories: [science]
+
+  # ── NOTICIAS ─────────────────────────────────────────
+  - name: google news
+    engine: google_news
+    shortcut: gn
+    categories: [news]
+
+  - name: bing news
+    engine: bing_news
+    shortcut: bn
+    categories: [news]
+
+  # ── FINANCIERO (API pública de búsqueda Yahoo Finance; motor json_engine nativo) ──
+  - name: yahoo finance
+    engine: json_engine
+    shortcut: yf
+    categories: [general]
+    search_url: https://query2.finance.yahoo.com/v1/finance/search?q={query}&quotesCount=25&newsCount=0&listsCount=0
+    results_query: quotes
+    url_query: symbol
+    url_prefix: https://finance.yahoo.com/quote/
+    title_query: shortname
+    content_query: exchDisp
+    headers:
+      User-Agent: Mozilla/5.0 (compatible; SearXNG; +https://github.com/searxng/searxng)
+      Accept: application/json
+
+  # ── TÉCNICO ────────────────────────────────────────
+  - name: github
+    engine: github
+    shortcut: gh
+    categories: [it]
+
+  - name: stackoverflow
+    engine: stackexchange
+    shortcut: so
+    api_site: "stackoverflow"
+    categories: [it]
+
+  - name: npm
+    engine: npm
+    shortcut: npm
+    categories: [it]

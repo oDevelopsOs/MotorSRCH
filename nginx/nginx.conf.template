@@ -1,0 +1,67 @@
+worker_processes auto;
+error_log /var/log/nginx/error.log warn;
+pid /tmp/nginx.pid;
+
+events {
+    worker_connections ${NGINX_WORKER_CONNECTIONS};
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+
+    proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=search_cache:10m max_size=${NGINX_SEARCH_CACHE_MAX} inactive=${NGINX_SEARCH_CACHE_INACTIVE};
+
+    limit_req_zone $binary_remote_addr zone=api:10m rate=${NGINX_LIMIT_REQ_RATE};
+
+    upstream search_api {
+        least_conn;
+${API_UPSTREAM_BLOCK}
+        keepalive 32;
+    }
+
+    server {
+        listen 80;
+        server_name _;
+
+        location /health {
+            limit_req off;
+            proxy_pass http://search_api/health;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+        }
+
+        location /search {
+            limit_req zone=api burst=${NGINX_LIMIT_REQ_BURST} nodelay;
+            proxy_pass http://search_api/search;
+            proxy_cache search_cache;
+            proxy_cache_key "$request_uri";
+            proxy_cache_valid 200 2m;
+            proxy_cache_use_stale updating;
+            add_header X-Cache-Status $upstream_cache_status;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+        }
+
+        location /resolve {
+            limit_req zone=api burst=${NGINX_LIMIT_REQ_BURST} nodelay;
+            proxy_pass http://search_api/resolve;
+            proxy_cache off;
+            proxy_read_timeout 120s;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+        }
+
+        location / {
+            limit_req zone=api burst=${NGINX_LIMIT_REQ_BURST} nodelay;
+            proxy_pass http://search_api;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}

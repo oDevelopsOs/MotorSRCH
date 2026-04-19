@@ -1,0 +1,5 @@
+# Shell entrypoints must use LF inside Linux containers
+*.sh text eol=lf
+api/entrypoint.sh text eol=lf
+processor/entrypoint.sh text eol=lf
+nginx/docker-entrypoint.sh text eol=lf

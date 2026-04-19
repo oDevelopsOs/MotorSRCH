@@ -1,0 +1,79 @@
+# Producción / VPS (Docker Engine + docker compose; no usar Podman en el servidor salvo que sepas lo que haces):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile searxng up -d
+#
+# - No publica puertos de Postgres, Redis, Meilisearch, Qdrant, NSQ, API ni processor al host.
+# - Solo NGINX queda en NGINX_HOST_PORT (por defecto 8888).
+# - Meilisearch en modo production; Postgres y Redis con tuning básico.
+# - Gunicorn + varios workers (UVICORN_WORKERS / PROCESSOR_WORKERS).
+# - nsq_to_http con mayor max-in-flight (NSQ_MAX_IN_FLIGHT).
+#
+# Segunda réplica de API (balanceo en NGINX): usa además
+#   -f docker-compose.dual-api.yml
+# y variable API_UPSTREAM_SERVERS (ver docker-compose.dual-api.yml).
+
+services:
+  postgres:
+    ports: []
+    command:
+      - postgres
+      - -c
+      - max_connections=200
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - work_mem=16MB
+
+  redis:
+    ports: []
+    command: >
+      redis-server --maxmemory ${REDIS_MAXMEMORY:-2gb} --maxmemory-policy allkeys-lru
+
+  meilisearch:
+    ports: []
+    environment:
+      MEILI_ENV: production
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-dev_master_key_change_me}
+
+  qdrant:
+    ports: []
+
+  nsqlookupd:
+    ports: []
+
+  nsqd:
+    ports: []
+
+  nsq_to_http:
+    command:
+      - /nsq_to_http
+      - --topic=raw_pages
+      - --channel=processor
+      - --lookupd-http-address=nsqlookupd:4161
+      - --post=http://processor:8080/internal/ingest
+      - --max-in-flight=${NSQ_MAX_IN_FLIGHT:-50}
+
+  api:
+    ports: []
+    environment:
+      UVICORN_WORKERS: ${UVICORN_WORKERS:-2}
+      HF_TOKEN: ${HF_TOKEN:-}
+      HF_HOME: ${HF_HOME:-/root/.cache/huggingface}
+
+  processor:
+    ports: []
+    environment:
+      PROCESSOR_WORKERS: ${PROCESSOR_WORKERS:-2}
+      HF_TOKEN: ${HF_TOKEN:-}
+      HF_HOME: ${HF_HOME:-/root/.cache/huggingface}
+
+  searxng:
+    ports: []
+
+  nginx:
+    ports:
+      - "${NGINX_HOST_PORT:-8888}:80"
+    environment:
+      NGINX_LIMIT_REQ_RATE: ${NGINX_LIMIT_REQ_RATE:-200r/s}
+      NGINX_LIMIT_REQ_BURST: ${NGINX_LIMIT_REQ_BURST:-100}
+      NGINX_WORKER_CONNECTIONS: ${NGINX_WORKER_CONNECTIONS:-4096}
+      API_UPSTREAM_SERVERS: ${API_UPSTREAM_SERVERS:-api:8000}

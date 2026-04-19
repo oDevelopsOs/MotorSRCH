@@ -1,0 +1,1688 @@
+{
+  "version": "2.0",
+  "updated": "2026-04-19",
+  "description": "Global seed list — financial, macro, news, academic, crypto. Every major world region. Priority 1=highest.",
+  "feeds": [
+    {
+      "url": "https://www.ft.com/rss/home",
+      "name": "Financial Times",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml",
+      "name": "Wall Street Journal Business",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+      "name": "WSJ Markets",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.economist.com/latest/rss.xml",
+      "name": "The Economist",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.economist.com/finance-and-economics/rss.xml",
+      "name": "The Economist Finance & Economics",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.economist.com/the-world-this-week/rss.xml",
+      "name": "The Economist The World This Week",
+      "category": "news",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.economist.com/science-and-technology/rss.xml",
+      "name": "The Economist Science & Technology",
+      "category": "tech",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://apnews.com/hub/ap-top-news?output=rss",
+      "name": "Associated Press Top News",
+      "category": "news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://apnews.com/hub/business?output=rss",
+      "name": "Associated Press Business",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.marketwatch.com/rss/topstories",
+      "name": "MarketWatch Top Stories",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.marketwatch.com/rss/realtimeheadlines",
+      "name": "MarketWatch Real-Time",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.content.dowjones.io/public/rss/mw_bulletins",
+      "name": "MarketWatch Bulletins",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+      "name": "CNBC Top News",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cnbc.com/id/15839135/device/rss/rss.html",
+      "name": "CNBC Markets",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cnbc.com/id/10000664/device/rss/rss.html",
+      "name": "CNBC Business",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cnbc.com/id/21324812/device/rss/rss.html",
+      "name": "CNBC US Economy",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.bloomberg.com/markets/news.rss",
+      "name": "Bloomberg Markets",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.bloomberg.com/technology/news.rss",
+      "name": "Bloomberg Technology",
+      "category": "tech",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.bloomberg.com/economics/news.rss",
+      "name": "Bloomberg Economics",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.bloomberg.com/industries/news.rss",
+      "name": "Bloomberg Industries",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://seekingalpha.com/feed.xml",
+      "name": "Seeking Alpha",
+      "category": "financial_analysis",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.latimes.com/business/rss2.0.xml",
+      "name": "Los Angeles Times Business",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.investing.com/rss/news_25.rss",
+      "name": "Investing.com Headlines",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.investing.com/rss/news_301.rss",
+      "name": "Investing.com News (wire 301)",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.investing.com/rss/stock_Indices.rss",
+      "name": "Investing.com Stock indices",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://fortune.com/feed/",
+      "name": "Fortune",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.forbes.com/business/feed/",
+      "name": "Forbes Business",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.businessinsider.com/rss",
+      "name": "Business Insider",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://rssfeeds.usatoday.com/usatoday-money-topstories&x=1",
+      "name": "USA Today Money",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.cbsnews.com/latest/rss/moneywatch",
+      "name": "CBS MoneyWatch",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.npr.org/510289/podcast.xml",
+      "name": "NPR Planet Money",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://thehill.com/homenews/feed/",
+      "name": "The Hill",
+      "category": "news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.benzinga.com/feed",
+      "name": "Benzinga",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.thestreet.com/.rss/full/",
+      "name": "TheStreet",
+      "category": "financial_news",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&dateb=&owner=include&count=40&output=atom",
+      "name": "SEC EDGAR 8-K Filings",
+      "category": "regulatory",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=10-K&dateb=&owner=include&count=40&output=atom",
+      "name": "SEC EDGAR 10-K Filings",
+      "category": "regulatory",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=10-Q&dateb=&owner=include&count=40&output=atom",
+      "name": "SEC EDGAR 10-Q Filings",
+      "category": "regulatory",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "name": "Federal Reserve Press Releases",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.federalreserve.gov/feeds/speeches.xml",
+      "name": "Fed Speeches",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "name": "Federal Reserve Monetary Policy",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://fredblog.stlouisfed.org/feed/",
+      "name": "FRED Blog (STL Fed)",
+      "category": "academic",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bls.gov/feed/bls_latest.rss",
+      "name": "Bureau of Labor Statistics",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://apps.bea.gov/rss/rss.xml",
+      "name": "Bureau of Economic Analysis",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.bankofcanada.ca/feed/",
+      "name": "Bank of Canada",
+      "category": "macro",
+      "region": "ca",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://financialpost.com/feed",
+      "name": "Financial Post",
+      "category": "financial_news",
+      "region": "ca",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.theglobeandmail.com/report-on-business/?service=rss",
+      "name": "The Globe and Mail Report on Business",
+      "category": "financial_news",
+      "region": "ca",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.theglobeandmail.com/investing/?service=rss",
+      "name": "The Globe and Mail Investing",
+      "category": "markets",
+      "region": "ca",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.ecb.europa.eu/rss/press.html",
+      "name": "ECB Press & speeches",
+      "category": "macro",
+      "region": "eu",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.bankofengland.co.uk/rss/news",
+      "name": "Bank of England",
+      "category": "macro",
+      "region": "uk",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.theguardian.com/business/rss",
+      "name": "The Guardian Business",
+      "category": "financial_news",
+      "region": "uk",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.irishtimes.com/cmlink/irish-times-business-1.919225",
+      "name": "Irish Times Business",
+      "category": "financial_news",
+      "region": "eu",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.cityam.com/feed/",
+      "name": "City AM",
+      "category": "financial_news",
+      "region": "uk",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "name": "BBC Business",
+      "category": "financial_news",
+      "region": "uk",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.skynews.com/feeds/rss/business.xml",
+      "name": "Sky News Business",
+      "category": "financial_news",
+      "region": "uk",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "name": "BBC World",
+      "category": "news",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+      "name": "BBC Technology",
+      "category": "tech",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
+      "name": "Handelsblatt",
+      "category": "financial_news",
+      "region": "de",
+      "lang": "de",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bundesbank.de/service/rss/en/633306/feed.rss",
+      "name": "Bundesbank",
+      "category": "macro",
+      "region": "de",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.lemonde.fr/economie/rss_full.xml",
+      "name": "Le Monde Économie",
+      "category": "financial_news",
+      "region": "fr",
+      "lang": "fr",
+      "priority": 2
+    },
+    {
+      "url": "https://www.challenges.fr/rss.xml",
+      "name": "Challenges",
+      "category": "financial_news",
+      "region": "fr",
+      "lang": "fr",
+      "priority": 2
+    },
+    {
+      "url": "https://cincodias.elpais.com/arc/outboundfeeds/rss/category/mercados/?outputType=xml",
+      "name": "Cinco Días Mercados",
+      "category": "markets",
+      "region": "es",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://www.expansion.com/rss/mercados.xml",
+      "name": "Expansión",
+      "category": "financial_news",
+      "region": "es",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bde.es/wbe/en/inicio/rss/rss-noticias/",
+      "name": "Banco de España",
+      "category": "macro",
+      "region": "es",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.sole24ore.com/rss/finanza-mercati.xml",
+      "name": "Il Sole 24 Ore",
+      "category": "financial_news",
+      "region": "it",
+      "lang": "it",
+      "priority": 2
+    },
+    {
+      "url": "https://www.politico.eu/rss",
+      "name": "Politico Europe",
+      "category": "financial_news",
+      "region": "eu",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://rss.dw.com/rdf/rss-en-bus",
+      "name": "Deutsche Welle Business",
+      "category": "financial_news",
+      "region": "de",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.france24.com/en/business/rss",
+      "name": "France 24 Business",
+      "category": "financial_news",
+      "region": "fr",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.euronews.com/rss?level=vertical&name=business",
+      "name": "Euronews Business",
+      "category": "financial_news",
+      "region": "eu",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://tass.com/rss/v2.xml",
+      "name": "TASS",
+      "category": "news",
+      "region": "ru",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.kommersant.ru/RSS/main.xml",
+      "name": "Kommersant",
+      "category": "financial_news",
+      "region": "ru",
+      "lang": "ru",
+      "priority": 2
+    },
+    {
+      "url": "https://www.vedomosti.ru/rss/articles",
+      "name": "Vedomosti",
+      "category": "financial_news",
+      "region": "ru",
+      "lang": "ru",
+      "priority": 2
+    },
+    {
+      "url": "https://www.interfax.ru/rss.asp",
+      "name": "Interfax Russia",
+      "category": "news",
+      "region": "ru",
+      "lang": "ru",
+      "priority": 2
+    },
+    {
+      "url": "https://smart-lab.ru/rss/",
+      "name": "Smart-Lab (investors forum RU)",
+      "category": "markets",
+      "region": "ru",
+      "lang": "ru",
+      "priority": 3
+    },
+    {
+      "url": "https://www.cbr.ru/rss/EngRssPress",
+      "name": "Bank of Russia (CBR)",
+      "category": "macro",
+      "region": "ru",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.themoscowtimes.com/rss/news",
+      "name": "The Moscow Times",
+      "category": "news",
+      "region": "ru",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.kyivpost.com/feed/",
+      "name": "Kyiv Post",
+      "category": "news",
+      "region": "ua",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://kazinform.kz/rss/",
+      "name": "Kazinform (Kazakhstan)",
+      "category": "news",
+      "region": "kz",
+      "lang": "ru",
+      "priority": 3
+    },
+    {
+      "url": "http://www.xinhuanet.com/english/rss/worldrss.xml",
+      "name": "Xinhua World",
+      "category": "news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "http://www.xinhuanet.com/english/rss/businessrss.xml",
+      "name": "Xinhua Business",
+      "category": "financial_news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.chinadaily.com.cn/rss/china_rss.xml",
+      "name": "China Daily China",
+      "category": "news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cgtn.com/subscribe/rss/section/business.xml",
+      "name": "CGTN Business",
+      "category": "financial_news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.cgtn.com/subscribe/rss/section/world.xml",
+      "name": "CGTN World",
+      "category": "news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.globaltimes.cn/rss/outbrain.xml",
+      "name": "Global Times",
+      "category": "news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.scmp.com/rss/91/feed",
+      "name": "South China Morning Post",
+      "category": "financial_news",
+      "region": "hk",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.scmp.com/rss/4/feed",
+      "name": "SCMP Business",
+      "category": "financial_news",
+      "region": "hk",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.scmp.com/rss/2/feed",
+      "name": "SCMP World",
+      "category": "news",
+      "region": "hk",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://asia.nikkei.com/rss/feed/nar",
+      "name": "Nikkei Asia",
+      "category": "financial_news",
+      "region": "jp",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.japantimes.co.jp/feed/",
+      "name": "Japan Times",
+      "category": "financial_news",
+      "region": "jp",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.boj.or.jp/en/rss/whatsnew.xml",
+      "name": "Bank of Japan",
+      "category": "macro",
+      "region": "jp",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://koreaherald.com/rss",
+      "name": "Korea Herald",
+      "category": "financial_news",
+      "region": "kr",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "name": "Yonhap News Agency",
+      "category": "news",
+      "region": "kr",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.straitstimes.com/news/business/rss.xml",
+      "name": "Straits Times Business (Singapore)",
+      "category": "financial_news",
+      "region": "sg",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.channelnewsasia.com/rssfeeds/8395986",
+      "name": "CNA Business",
+      "category": "financial_news",
+      "region": "sg",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.smh.com.au/rss/business.xml",
+      "name": "Sydney Morning Herald Business",
+      "category": "financial_news",
+      "region": "au",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.afr.com/markets?format=rss",
+      "name": "Australian Financial Review Markets",
+      "category": "markets",
+      "region": "au",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.afr.com/wealth?format=rss",
+      "name": "Australian Financial Review Wealth",
+      "category": "financial_news",
+      "region": "au",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bangkokpost.com/rss/data/business.xml",
+      "name": "Bangkok Post Business",
+      "category": "financial_news",
+      "region": "th",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://e.vnexpress.net/rss/business.rss",
+      "name": "VnExpress Business",
+      "category": "financial_news",
+      "region": "vn",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.caixin.com/rss/en_news.xml",
+      "name": "Caixin Global",
+      "category": "financial_news",
+      "region": "cn",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://economictimes.indiatimes.com/rssfeedsdefault.cms",
+      "name": "Economic Times India",
+      "category": "financial_news",
+      "region": "in",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",
+      "name": "ET Markets",
+      "category": "markets",
+      "region": "in",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.livemint.com/rss/markets",
+      "name": "LiveMint Markets",
+      "category": "markets",
+      "region": "in",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.thehindubusinessline.com/news/?service=rss",
+      "name": "The Hindu Business Line News",
+      "category": "financial_news",
+      "region": "in",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.thehindubusinessline.com/markets/?service=rss",
+      "name": "The Hindu Business Line Markets",
+      "category": "markets",
+      "region": "in",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://rbi.org.in/Scripts/RSSFeeds.aspx",
+      "name": "Reserve Bank of India",
+      "category": "macro",
+      "region": "in",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://profit.pakistantoday.com.pk/feed/",
+      "name": "Pakistan Today Business",
+      "category": "financial_news",
+      "region": "pk",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.thedailystar.net/business/rss.xml",
+      "name": "The Daily Star Bangladesh Business",
+      "category": "financial_news",
+      "region": "bd",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "name": "Al Jazeera",
+      "category": "news",
+      "region": "qa",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.dailysabah.com/rss",
+      "name": "Daily Sabah Turkey",
+      "category": "financial_news",
+      "region": "tr",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.hurriyetdailynews.com/rss",
+      "name": "Hurriyet Daily News",
+      "category": "financial_news",
+      "region": "tr",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.al-monitor.com/rss",
+      "name": "Al-Monitor",
+      "category": "news",
+      "region": "eg",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.middleeasteye.net/rss",
+      "name": "Middle East Eye",
+      "category": "news",
+      "region": "qa",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.timesofisrael.com/feed/",
+      "name": "Times of Israel",
+      "category": "news",
+      "region": "il",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.businesslive.co.za/arc/outboundfeeds/rss/?outputType=xml",
+      "name": "Business Live South Africa",
+      "category": "financial_news",
+      "region": "za",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.moneyweb.co.za/feed/",
+      "name": "Moneyweb South Africa",
+      "category": "financial_news",
+      "region": "za",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://allafrica.com/tools/headlines/rdf/kenya/headlines.rdf",
+      "name": "AllAfrica Kenya headlines",
+      "category": "news",
+      "region": "ke",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://businessday.ng/feed/",
+      "name": "BusinessDay Nigeria",
+      "category": "financial_news",
+      "region": "ng",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.africanews.com/feed/rss",
+      "name": "Africanews",
+      "category": "news",
+      "region": "af",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://allafrica.com/tools/headlines/rdf/africa/headlines.rdf",
+      "name": "AllAfrica",
+      "category": "news",
+      "region": "af",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.infobae.com/arc/outboundfeeds/rss/category/economia/?outputType=xml",
+      "name": "Infobae Economía",
+      "category": "financial_news",
+      "region": "ar",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://www.lanacion.com.ar/arc/outboundfeeds/rss/?outputType=xml&section=economia",
+      "name": "La Nación Argentina",
+      "category": "financial_news",
+      "region": "ar",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://expansion.mx/rss/economia",
+      "name": "Expansión México",
+      "category": "financial_news",
+      "region": "mx",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://www.elfinanciero.com.mx/arc/outboundfeeds/rss/?outputType=xml",
+      "name": "El Financiero México",
+      "category": "financial_news",
+      "region": "mx",
+      "lang": "es",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.folha.uol.com.br/mercado/rss091.xml",
+      "name": "Folha Mercado",
+      "category": "financial_news",
+      "region": "br",
+      "lang": "pt",
+      "priority": 2
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
+      "name": "Agência Brasil Economia",
+      "category": "financial_news",
+      "region": "br",
+      "lang": "pt",
+      "priority": 2
+    },
+    {
+      "url": "https://g1.globo.com/dynamo/economia/rss2.xml",
+      "name": "G1 Economia (Globo)",
+      "category": "financial_news",
+      "region": "br",
+      "lang": "pt",
+      "priority": 1
+    },
+    {
+      "url": "https://www.estadao.com.br/arc/outboundfeeds/rss/?outputType=xml",
+      "name": "O Estado de S. Paulo",
+      "category": "financial_news",
+      "region": "br",
+      "lang": "pt",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bcb.gov.br/api/feed/sitebcb/sitefeeds/noticias",
+      "name": "Banco Central do Brasil",
+      "category": "macro",
+      "region": "br",
+      "lang": "pt",
+      "priority": 1
+    },
+    {
+      "url": "https://gestion.pe/rss/",
+      "name": "Gestión Perú",
+      "category": "financial_news",
+      "region": "pe",
+      "lang": "es",
+      "priority": 3
+    },
+    {
+      "url": "https://www.eldinero.com.do/feed/",
+      "name": "El Dinero Rep. Dominicana",
+      "category": "financial_news",
+      "region": "do",
+      "lang": "es",
+      "priority": 3
+    },
+    {
+      "url": "https://www.imf.org/external/rss/cat/~ENG~RSS20~Latest~IMF%20News.xml",
+      "name": "IMF News",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.imf.org/external/rss/cat/~ENG~RSS20~Latest~WEO.xml",
+      "name": "IMF World Economic Outlook",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.worldbank.org/en/news/rss.xml",
+      "name": "World Bank",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.imf.org/en/Blogs/Articles/rss.xml",
+      "name": "IMF Blog",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.bis.org/doclist/bis_fsi_publs.rss",
+      "name": "BIS Research publications",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "http://feeds.feedburner.com/oecd",
+      "name": "OECD (FeedBurner)",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.wto.org/rss/english/news_e.rss",
+      "name": "WTO",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://news.un.org/feed/subscribe/en/news/all/rss.xml",
+      "name": "UN News",
+      "category": "news",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.imf.org/external/rss/cat/~ENG~RSS20~Latest~Fiscal%20Monitor.xml",
+      "name": "IMF Fiscal Monitor",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/q-fin",
+      "name": "arXiv Quantitative Finance",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/q-fin.PM",
+      "name": "arXiv Portfolio Management",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/q-fin.TR",
+      "name": "arXiv Trading",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/q-fin.RM",
+      "name": "arXiv Risk Management",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/econ",
+      "name": "arXiv Economics",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://export.arxiv.org/rss/cs.AI",
+      "name": "arXiv AI",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://export.arxiv.org/rss/stat.AP",
+      "name": "arXiv Applications of Statistics",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.nber.org/rss/new.xml",
+      "name": "NBER Working Papers",
+      "category": "academic",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.imf.org/external/rss/cat/~ENG~RSS20~Latest~Working%20Papers.xml",
+      "name": "IMF Working Papers",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.bis.org/doclist/reshub_papers.rss",
+      "name": "BIS Central Bank Research Hub",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.brookings.edu/feed/",
+      "name": "Brookings Institution",
+      "category": "academic",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.project-syndicate.org/rss",
+      "name": "Project Syndicate",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.cato.org/rss/real-world-economics",
+      "name": "Cato Institute Real World Economics",
+      "category": "academic",
+      "region": "us",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.csis.org/rss.xml",
+      "name": "CSIS",
+      "category": "news",
+      "region": "us",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://oilprice.com/rss/main",
+      "name": "OilPrice.com",
+      "category": "commodities",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.mining.com/feed/",
+      "name": "Mining.com",
+      "category": "commodities",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.hellenicshippingnews.com/feed/",
+      "name": "Hellenic Shipping News",
+      "category": "commodities",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.eia.gov/rss/todayinenergy.xml",
+      "name": "EIA Today in Energy (US)",
+      "category": "commodities",
+      "region": "us",
+      "lang": "en",
+      "priority": 1
+    },
+    {
+      "url": "https://www.naturalgasintel.com/feed/",
+      "name": "Natural Gas Intelligence",
+      "category": "commodities",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "name": "CoinDesk",
+      "category": "crypto",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://cointelegraph.com/rss",
+      "name": "CoinTelegraph",
+      "category": "crypto",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://decrypt.co/feed",
+      "name": "Decrypt",
+      "category": "crypto",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://theblock.co/rss.xml",
+      "name": "The Block",
+      "category": "crypto",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://bitcoinmagazine.com/.rss/full/",
+      "name": "Bitcoin Magazine",
+      "category": "crypto",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://techcrunch.com/feed/",
+      "name": "TechCrunch",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.feedburner.com/venturebeat/SZYF",
+      "name": "VentureBeat",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.wired.com/feed/rss",
+      "name": "Wired",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://api.axios.com/feed/",
+      "name": "Axios",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.theverge.com/rss/index.xml",
+      "name": "The Verge",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "name": "Ars Technica",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.engadget.com/rss.xml",
+      "name": "Engadget",
+      "category": "tech",
+      "region": "us",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://restofworld.org/feed/",
+      "name": "Rest of World",
+      "category": "tech",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.semafor.com/rss.xml",
+      "name": "Semafor",
+      "category": "financial_news",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://news.ycombinator.com/rss",
+      "name": "Hacker News",
+      "category": "tech",
+      "region": "global",
+      "lang": "en",
+      "priority": 2
+    },
+    {
+      "url": "https://www.reddit.com/r/investing/.rss",
+      "name": "Reddit r/investing",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/stocks/.rss",
+      "name": "Reddit r/stocks",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/SecurityAnalysis/.rss",
+      "name": "Reddit r/SecurityAnalysis",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/economics/.rss",
+      "name": "Reddit r/economics",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/wallstreetbets/.rss",
+      "name": "Reddit r/wallstreetbets",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/finance/.rss",
+      "name": "Reddit r/finance",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    },
+    {
+      "url": "https://www.reddit.com/r/business/.rss",
+      "name": "Reddit r/business",
+      "category": "social",
+      "region": "global",
+      "lang": "en",
+      "priority": 3
+    }
+  ],
+  "urls": [
+    {
+      "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+      "name": "SEC EDGAR Submissions API (ejemplo CIK Apple; sustituye CIK)",
+      "category": "regulatory",
+      "region": "us",
+      "lang": "en",
+      "priority": 1,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://efts.sec.gov/LATEST/search-index?q=%22material+event%22&forms=8-K",
+      "name": "SEC Full Text Search",
+      "category": "regulatory",
+      "region": "us",
+      "lang": "en",
+      "priority": 1,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://api.stlouisfed.org/fred/releases?api_key=&file_type=json",
+      "name": "FRED Releases",
+      "category": "macro",
+      "region": "us",
+      "lang": "en",
+      "priority": 1,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://iss.moex.com/iss/index.json",
+      "name": "MOEX ISS API (índice)",
+      "category": "markets",
+      "region": "ru",
+      "lang": "en",
+      "priority": 1,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://api.worldbank.org/v2/en/indicator/NY.GDP.MKTP.CD?downloadformat=json",
+      "name": "World Bank GDP Data",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://api.openalex.org/works?search=finance&sort=cited_by_count:desc&per-page=50&mailto=crawler@example.com",
+      "name": "OpenAlex Finance Papers",
+      "category": "academic",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://sdmx.oecd.org/public/rest/dataflow",
+      "name": "OECD SDMX dataflow (catálogo; elige dataset en cliente)",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp",
+      "name": "Eurostat GDP",
+      "category": "macro",
+      "region": "eu",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://www.nseindia.com/api/allIndices",
+      "name": "NSE India Indices",
+      "category": "markets",
+      "region": "in",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "api"
+    },
+    {
+      "url": "https://www.sgx.com/securities/securities-prices",
+      "name": "SGX Singapore",
+      "category": "markets",
+      "region": "sg",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://finance.yahoo.com/markets/stocks/most-active/",
+      "name": "Yahoo Finance Most Active",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://finviz.com/news.ashx",
+      "name": "Finviz News",
+      "category": "markets",
+      "region": "us",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://www.macrotrends.net/",
+      "name": "MacroTrends",
+      "category": "macro",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://www.wisesheets.io/",
+      "name": "WiseSheets Financial Data",
+      "category": "financial_data",
+      "region": "global",
+      "lang": "en",
+      "priority": 3,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://companiesmarketcap.com/",
+      "name": "Companies Market Cap",
+      "category": "markets",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+      "name": "Wikipedia Largest Companies",
+      "category": "financial_data",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/List_of_stock_exchanges",
+      "name": "Wikipedia Stock Exchanges",
+      "category": "financial_data",
+      "region": "global",
+      "lang": "en",
+      "priority": 2,
+      "crawl_strategy": "scrape"
+    }
+  ],
+  "meta": {
+    "regions": [
+      "global",
+      "us",
+      "ca",
+      "au",
+      "uk",
+      "eu",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "ru",
+      "ua",
+      "kz",
+      "cn",
+      "hk",
+      "jp",
+      "kr",
+      "sg",
+      "th",
+      "vn",
+      "id",
+      "in",
+      "pk",
+      "bd",
+      "qa",
+      "sa",
+      "ae",
+      "tr",
+      "eg",
+      "il",
+      "za",
+      "ke",
+      "ng",
+      "gh",
+      "ar",
+      "mx",
+      "br",
+      "co",
+      "pe",
+      "do",
+      "af",
+      "af_sub"
+    ],
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "fr",
+      "de",
+      "ru",
+      "zh",
+      "ja",
+      "ko",
+      "ar",
+      "it",
+      "tr",
+      "vi",
+      "id",
+      "hi"
+    ],
+    "categories": [
+      "financial_news",
+      "markets",
+      "macro",
+      "regulatory",
+      "academic",
+      "commodities",
+      "crypto",
+      "tech",
+      "social",
+      "financial_data",
+      "financial_education",
+      "financial_analysis",
+      "news"
+    ],
+    "priority_distribution": {
+      "1_critical": "bancos centrales, reguladores, agencias globales, RSS primarios",
+      "2_high": "medios financieros regionales de referencia, datos secundarios",
+      "3_signal": "foros, señales alternativas, fuentes complementarias"
+    },
+    "crawl_notes": "Feeds RSS → gofeed directo en el crawler Go. URLs con crawl_strategy=api → llamadas HTTP directas. URLs con crawl_strategy=scrape → capa de fetch (Crawl4AI → Firecrawl → FlareSolverr → curl-impersonate → Colly).",
+    "total_feeds": 180,
+    "total_urls": 17
+  }
+}

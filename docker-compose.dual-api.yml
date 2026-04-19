@@ -1,0 +1,59 @@
+# Opcional: segunda réplica de la API para balanceo detrás de NGINX.
+# Requiere también docker-compose.prod.yml (puertos cerrados, mismo patrón de red).
+# Uso:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.dual-api.yml --profile searxng up -d --build
+#
+# Requiere RAM suficiente (cada réplica carga el modelo de embeddings).
+
+services:
+  api2:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      MEILI_URL: http://meilisearch:7700
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-dev_master_key_change_me}
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_COLLECTION: documents
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      EMBED_MODEL: ${EMBED_MODEL:-BAAI/bge-m3}
+      USE_OLLAMA_FOR_PLAN: ${USE_OLLAMA_FOR_PLAN:-0}
+      ENABLE_SYNTHESIS: ${ENABLE_SYNTHESIS:-0}
+      ENABLE_RERANK: ${ENABLE_RERANK:-0}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      SYNTHESIS_PROVIDER: ${SYNTHESIS_PROVIDER:-ollama}
+      FIRECRAWL_AGENT_BASE_URL: ${FIRECRAWL_AGENT_BASE_URL:-https://api.firecrawl.dev}
+      FIRECRAWL_AGENT_API_KEY: ${FIRECRAWL_AGENT_API_KEY:-}
+      OPENPERPLEX_URL: ${OPENPERPLEX_URL:-}
+      VANE_API_URL: ${VANE_API_URL:-}
+      VANE_SEARCH_PATH: ${VANE_SEARCH_PATH:-api/search}
+      BRAIN_HTTP_TIMEOUT: ${BRAIN_HTTP_TIMEOUT:-120}
+      BRAIN_BOOST_MAX_WAIT: ${BRAIN_BOOST_MAX_WAIT:-90}
+      ENABLE_SEARXNG: ${ENABLE_SEARXNG:-0}
+      SEARXNG_URL: ${SEARXNG_URL:-}
+      SEARXNG_MAX_RESULTS: ${SEARXNG_MAX_RESULTS:-15}
+      ENABLE_SEARXNG_DECOMPOSITION: ${ENABLE_SEARXNG_DECOMPOSITION:-1}
+      SEARXNG_SUBQUERY_TIMEOUT: ${SEARXNG_SUBQUERY_TIMEOUT:-8}
+      SEARXNG_AS_PRIMARY: ${SEARXNG_AS_PRIMARY:-1}
+      UVICORN_WORKERS: ${UVICORN_WORKERS:-2}
+      HF_TOKEN: ${HF_TOKEN:-}
+      HF_HOME: ${HF_HOME:-/root/.cache/huggingface}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      meilisearch:
+        condition: service_started
+      qdrant:
+        condition: service_started
+      redis:
+        condition: service_started
+
+  nginx:
+    environment:
+      API_UPSTREAM_SERVERS: ${API_UPSTREAM_SERVERS:-api:8000,api2:8000}
+    depends_on:
+      - api
+      - api2
