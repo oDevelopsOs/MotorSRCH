@@ -1,0 +1,3 @@
+# Monorepo: API deps live under api/. Satisfies `pip install -r requirements.txt` if a host uses the repo root.
+# Prefer deploying the API with Docker (Dockerfile at repo root or api/Dockerfile, context api/).
+-r api/requirements.txt

@@ -64,8 +64,8 @@ services:
     runtime: docker
     region: oregon
     plan: starter
-    dockerfilePath: ./api/Dockerfile
-    dockerContext: ./api
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /health
     envVars:
       - fromGroup: motor-shared
