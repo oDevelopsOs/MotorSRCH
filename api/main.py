@@ -21,6 +21,7 @@ from app.brain import router as brain_router
 from app.fusion import multi_rrf
 from app.pipeline import gather_external, run_resolve
 from app.query_plan import cache_ttl_seconds, fast_route, plan_with_ollama_if_needed
+from app.sources import fetch_searxng
 
 app = FastAPI(title="InvestSearch API")
 
@@ -209,8 +210,15 @@ async def search(
             ) from e
     meili_hits = meili_res.get("hits") or []
     if not meili_hits:
-        # Empty local index: fallback to external sources so /search remains useful.
-        external_hits = await gather_external(plan_obj, q)
+        # Empty local index: prioritize SearXNG so /search behaves as a metasearch.
+        external_hits = []
+        if settings.ENABLE_SEARXNG and settings.SEARXNG_URL:
+            try:
+                external_hits = await fetch_searxng(q)
+            except Exception:
+                external_hits = []
+        if not external_hits:
+            external_hits = await gather_external(plan_obj, q)
         ext_results = [h.to_result_dict() for h in external_hits[:limit]]
         ms = (time.perf_counter() - t0) * 1000.0
         out: dict[str, Any] = {
@@ -221,6 +229,10 @@ async def search(
             "cached": False,
             "fallback": "external_sources",
         }
+        if not ext_results:
+            out["message"] = (
+                "No external results. Configure SearXNG with ENABLE_SEARXNG=1 and SEARXNG_URL."
+            )
         if include_plan:
             out["plan"] = plan_obj.to_dict()
         try:
