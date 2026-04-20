@@ -5,9 +5,10 @@ import json
 import time
 from typing import TYPE_CHECKING, Any
 
+import httpx
 import numpy as np
 import redis
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from meilisearch import Client as MeiliClient
 from qdrant_client import QdrantClient
@@ -94,6 +95,22 @@ def build_meili_filter(
     return " AND ".join(parts)
 
 
+def ensure_meili_documents_index() -> bool:
+    """Create `documents` index if missing (idempotent)."""
+    base = settings.MEILI_URL.rstrip("/")
+    headers: dict[str, str] = {"Content-Type": "application/json"}
+    if settings.MEILI_MASTER_KEY:
+        headers["Authorization"] = f"Bearer {settings.MEILI_MASTER_KEY}"
+    payload = {"uid": "documents", "primaryKey": "id"}
+    try:
+        with httpx.Client(timeout=8.0) as client:
+            resp = client.post(f"{base}/indexes", headers=headers, json=payload)
+        # 409 = already exists; 201/202 = created/accepted
+        return resp.status_code in (200, 201, 202, 409)
+    except Exception:
+        return False
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -164,7 +181,17 @@ async def search(
     if filt:
         search_params["filter"] = filt
 
-    meili_res = idx.search(q, search_params)
+    try:
+        meili_res = idx.search(q, search_params)
+    except Exception as e:
+        # First boot or fresh Meili volume: auto-create index and retry once.
+        if "index_not_found" in str(e) and ensure_meili_documents_index():
+            meili_res = idx.search(q, search_params)
+        else:
+            raise HTTPException(
+                status_code=503,
+                detail="Meilisearch unavailable or index `documents` missing.",
+            ) from e
     meili_hits = meili_res.get("hits") or []
 
     vec = embed_query(q)
