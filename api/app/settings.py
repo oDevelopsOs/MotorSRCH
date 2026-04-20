@@ -27,6 +27,7 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "documents")
 EMBED_MODEL = os.getenv("EMBED_MODEL", "BAAI/bge-m3")
+ENABLE_VECTOR_SEARCH = env_bool("ENABLE_VECTOR_SEARCH", False)
 RRF_K = int(os.getenv("RRF_K", "60"))
 
 SEARCH_CACHE_TTL = int(os.getenv("SEARCH_CACHE_TTL", "120"))
@@ -41,7 +42,7 @@ FUSION_RECENCY_WEIGHT = env_float("FUSION_RECENCY_WEIGHT", 0.25)
 
 # Ollama (plan + synthesis)
 OLLAMA_URL = os.getenv("OLLAMA_URL") or "http://localhost:11434"
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
 USE_OLLAMA_FOR_PLAN = env_bool("USE_OLLAMA_FOR_PLAN", False)
 OLLAMA_PLAN_TIMEOUT = float(os.getenv("OLLAMA_PLAN_TIMEOUT", "15"))
 OLLAMA_HTTP_TIMEOUT = float(os.getenv("OLLAMA_HTTP_TIMEOUT", "120"))

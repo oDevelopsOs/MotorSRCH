@@ -210,17 +210,18 @@ async def search(
     meili_hits = meili_res.get("hits") or []
 
     qdrant_ids: list[str] = []
-    try:
-        vec = embed_query(q)
-        qr = get_qdrant().search(
-            collection_name=settings.QDRANT_COLLECTION,
-            query_vector=vec,
-            limit=limit * 2,
-            with_payload=False,
-        )
-        qdrant_ids = [str(p.id) for p in qr.points]
-    except Exception:
-        qdrant_ids = []
+    if settings.ENABLE_VECTOR_SEARCH:
+        try:
+            vec = embed_query(q)
+            qr = get_qdrant().search(
+                collection_name=settings.QDRANT_COLLECTION,
+                query_vector=vec,
+                limit=limit * 2,
+                with_payload=False,
+            )
+            qdrant_ids = [str(p.id) for p in qr.points]
+        except Exception:
+            qdrant_ids = []
 
     meili_ids = [str(h.get("id")) for h in meili_hits if h.get("id")]
     rrf_scores = multi_rrf([meili_ids, qdrant_ids], settings.RRF_K)
