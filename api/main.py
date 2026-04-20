@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 from app import settings
 from app.brain import router as brain_router
 from app.fusion import multi_rrf
-from app.pipeline import run_resolve
+from app.pipeline import gather_external, run_resolve
 from app.query_plan import cache_ttl_seconds, fast_route, plan_with_ollama_if_needed
 
 app = FastAPI(title="InvestSearch API")
@@ -208,6 +208,26 @@ async def search(
                 detail="Meilisearch unavailable or index `documents` missing.",
             ) from e
     meili_hits = meili_res.get("hits") or []
+    if not meili_hits:
+        # Empty local index: fallback to external sources so /search remains useful.
+        external_hits = await gather_external(plan_obj, q)
+        ext_results = [h.to_result_dict() for h in external_hits[:limit]]
+        ms = (time.perf_counter() - t0) * 1000.0
+        out: dict[str, Any] = {
+            "query": q,
+            "total": len(ext_results),
+            "results": ext_results,
+            "search_time_ms": round(ms, 2),
+            "cached": False,
+            "fallback": "external_sources",
+        }
+        if include_plan:
+            out["plan"] = plan_obj.to_dict()
+        try:
+            get_redis().setex(rkey, ttl, json.dumps(out))
+        except Exception:
+            pass
+        return out
 
     qdrant_ids: list[str] = []
     if settings.ENABLE_VECTOR_SEARCH:
