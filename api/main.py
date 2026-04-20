@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any
 import httpx
 import numpy as np
 import redis
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from meilisearch import Client as MeiliClient
 from qdrant_client import QdrantClient
@@ -121,6 +121,21 @@ def root() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.head("/", include_in_schema=False)
+def root_head() -> Response:
+    return Response(status_code=200)
+
+
+@app.head("/health", include_in_schema=False)
+def health_head() -> Response:
+    return Response(status_code=200)
+
+
+@app.head("/search", include_in_schema=False)
+def search_head() -> Response:
+    return Response(status_code=200)
+
+
 @app.get("/search")
 async def search(
     q: str = Query(..., min_length=2, max_length=500),
@@ -194,9 +209,9 @@ async def search(
             ) from e
     meili_hits = meili_res.get("hits") or []
 
-    vec = embed_query(q)
     qdrant_ids: list[str] = []
     try:
+        vec = embed_query(q)
         qr = get_qdrant().search(
             collection_name=settings.QDRANT_COLLECTION,
             query_vector=vec,
