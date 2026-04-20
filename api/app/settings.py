@@ -23,6 +23,7 @@ def env_float(name: str, default: float) -> float:
 MEILI_URL = os.getenv("MEILI_URL", "http://localhost:7700")
 MEILI_MASTER_KEY = os.getenv("MEILI_MASTER_KEY", "")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "documents")
 EMBED_MODEL = os.getenv("EMBED_MODEL", "BAAI/bge-m3")

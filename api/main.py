@@ -48,7 +48,10 @@ def get_meili() -> MeiliClient:
 def get_qdrant() -> QdrantClient:
     global _qdrant
     if _qdrant is None:
-        _qdrant = QdrantClient(url=settings.QDRANT_URL)
+        _qdrant = QdrantClient(
+            url=settings.QDRANT_URL,
+            api_key=settings.QDRANT_API_KEY or None,
+        )
     return _qdrant
 
 
