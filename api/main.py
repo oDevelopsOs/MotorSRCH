@@ -96,6 +96,11 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/")
+def root() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @app.get("/search")
 async def search(
     q: str = Query(..., min_length=2, max_length=500),
